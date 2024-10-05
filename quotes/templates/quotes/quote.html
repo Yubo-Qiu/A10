@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h1>Random Quote said by TRUMP</h1>
+    <div class="quote-container">
+        <p class="quote">{{ quote }}</p>
+        <a href="{% url 'quote' %}" class="refresh-button">Refresh Quote</a>
+    </div>
+    <img src="{{ image }}" alt="Random Image">
+</div>
+{% endblock %}

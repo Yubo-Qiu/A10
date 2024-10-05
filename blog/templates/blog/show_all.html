@@ -1,0 +1,21 @@
+
+{% block content %}
+
+<h1>Showing all Articles</h1>
+
+<main class="">
+    {% for a in articles%}
+    <article>
+        <img src="{{a.image_url}}" alt="img">
+        <div>
+            <h2>{{a.title}}</h2>
+            <h3>by {{a.author}} at {{published}}</h3>
+            <p>
+                {{a.text}}
+            </p>
+        </div>
+    </article>
+    {% endfor %}
+</main>
+
+{% endblock %}

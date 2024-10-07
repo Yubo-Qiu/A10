@@ -63,7 +63,7 @@ MIDDLEWARE = [
 
 
 
-ROOT_URLCONF = "django_project.urls"
+ROOT_URLCONF = "cs412.urls"
 
 TEMPLATES = [
     {
@@ -81,7 +81,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "django_project.wsgi.application"
+WSGI_APPLICATION = "cs412.wsgi.application"
 
 
 # Database

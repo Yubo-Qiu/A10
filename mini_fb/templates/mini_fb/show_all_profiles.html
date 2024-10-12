@@ -12,12 +12,13 @@
         </tr>
         {% for profile in object_list %}
         <tr>
-            <td><p>{{ profile.first_name }}</p></td>
-            <td><p>{{ profile.last_name }}</p></td>
-            <td><p>{{ profile.city }}</p></td>
-            <td><img src="{{ profile.profile_image_url }}" alt="{{ profile.first_name }} {{ profile.last_name }}"></td>
+            <td><a href="{% url 'show_profile' profile.pk %}">{{ profile.first_name }}</a></td>
+            <td><a href="{% url 'show_profile' profile.pk %}">{{ profile.last_name }}</a></td>
+            <td>{{ profile.city }}</td>
+            <td><img src="{{ profile.profile_image_url }}" alt="Profile Image" style="width:50px; height:50px;"></td>
         </tr>
         {% endfor %}
     </table>
 </div>
+<a href="{% url 'create_profile' %}">Create New Profile</a>
 {% endblock %}

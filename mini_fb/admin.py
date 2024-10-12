@@ -5,3 +5,6 @@ from .models import Profile
 
 admin.site.register(Profile)
 
+from .models import StatusMessage
+
+admin.site.register(StatusMessage)

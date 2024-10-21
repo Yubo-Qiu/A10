@@ -8,10 +8,17 @@
 <h2>Status Messages</h2>
 <ul>
     {% for message in object.get_status_messages %}
-    <li>{{ message.timestamp }}: {{ message.message }}</li>
+        <li>
+            {{ message.timestamp }}: {{ message.message }}
+            {% for img in message.get_images %}
+                <img src="{{ img.image_file.url }}" alt="Image" style="width:100px; height:100px;">
+            {% endfor %}
+            <a href="{% url 'delete_status' message.pk %}">Delete</a>
+        </li>
     {% empty %}
-    <li>No status messages yet.</li>
+        <li>No status messages yet.</li>
     {% endfor %}
 </ul>
 <a href="{% url 'create_status' object.pk %}">Post a Status Message</a>
+<a href="{% url 'update_profile' object.pk %}">Update Profile</a>
 {% endblock %}

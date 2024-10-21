@@ -5,6 +5,7 @@ from .models import Profile
 
 admin.site.register(Profile)
 
-from .models import StatusMessage
+from .models import StatusMessage, Image
 
 admin.site.register(StatusMessage)
+admin.site.register(Image)

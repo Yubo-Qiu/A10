@@ -1,8 +1,5 @@
 from django.db import models
 
-# Create your models here.
-from django.db import models
-
 class Profile(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
@@ -23,4 +20,14 @@ class StatusMessage(models.Model):
 
     def __str__(self):
         return f"{self.message} (posted by {self.profile.first_name} at {self.timestamp})"
+    
+    def get_images(self):
+        return self.image_set.all()
 
+class Image(models.Model):
+    image_file = models.ImageField(upload_to='images/')  # Store images in a directory called 'images/'
+    status_message = models.ForeignKey(StatusMessage, on_delete=models.CASCADE)  # Foreign key to StatusMessage
+    timestamp = models.DateTimeField(auto_now_add=True)  # Automatically set timestamp when an image is added
+
+    def __str__(self):
+        return f"Image for {self.status_message} uploaded on {self.timestamp}"

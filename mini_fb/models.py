@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class Profile(models.Model):
     first_name = models.CharField(max_length=30)
@@ -12,6 +13,28 @@ class Profile(models.Model):
     
     def get_status_messages(self):
         return self.statusmessage_set.all().order_by('-timestamp')
+    
+    def get_friends(self):
+        friends = Friend.objects.filter(models.Q(profile1=self) | models.Q(profile2=self))
+        return [f.profile2 if f.profile1 == self else f.profile1 for f in friends]
+
+    def add_friend(self, other):
+        if self != other and not Friend.objects.filter(
+            models.Q(profile1=self, profile2=other) | models.Q(profile1=other, profile2=self)
+        ).exists():
+            Friend.objects.create(profile1=self, profile2=other)
+
+    def get_friend_suggestions(self):
+        current_friends = self.get_friends()
+        return Profile.objects.exclude(pk__in=[self.pk] + [friend.pk for friend in current_friends])
+
+    def get_news_feed(self):
+        friends = self.get_friends()
+        news_feed = StatusMessage.objects.filter(profile__in=[self] + friends).order_by('-timestamp')
+        print("News Feed for:", self, "includes messages from profiles:", [p.first_name for p in [self] + friends])
+        print("Number of status messages in feed:", news_feed.count())
+        return news_feed
+
 
 class StatusMessage(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -31,3 +54,11 @@ class Image(models.Model):
 
     def __str__(self):
         return f"Image for {self.status_message} uploaded on {self.timestamp}"
+    
+class Friend(models.Model):
+    profile1 = models.ForeignKey(Profile, related_name="profile1", on_delete=models.CASCADE)
+    profile2 = models.ForeignKey(Profile, related_name="profile2", on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.profile1.first_name} {self.profile1.last_name} & {self.profile2.first_name} {self.profile2.last_name}"

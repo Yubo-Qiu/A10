@@ -19,6 +19,16 @@
         <li>No status messages yet.</li>
     {% endfor %}
 </ul>
+<h3>Friends</h3>
+<ul>
+    {% for friend in object.get_friends %}
+        <li><a href="{% url 'show_profile' friend.pk %}">{{ friend.first_name }} {{ friend.last_name }}</a></li>
+    {% empty %}
+        <li>No friends yet.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'friend_suggestions' object.pk %}">Friend Suggestions</a>
 <a href="{% url 'create_status' object.pk %}">Post a Status Message</a>
 <a href="{% url 'update_profile' object.pk %}">Update Profile</a>
+<a href="{% url 'news_feed' object.pk %}">View News Feed</a>
 {% endblock %}

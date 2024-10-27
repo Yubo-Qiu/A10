@@ -1,0 +1,20 @@
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+<h2>{{ object.first_name }}'s News Feed</h2>
+<ul>
+    {% for message in object.get_news_feed %}
+        <li>
+            <strong>{{ message.profile.first_name }} {{ message.profile.last_name }}</strong>: {{ message.message }}
+            <br>
+            <em>Posted on: {{ message.timestamp|date:"F j, Y, g:i a" }}</em>
+            {% for img in message.get_images %}
+                <img src="{{ img.image_file.url }}" alt="Image" style="width:100px; height:100px;">
+            {% endfor %}
+        </li>
+    {% empty %}
+        <li>No status messages available in your news feed.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'show_profile' object.pk %}">Back to Profile</a>
+{% endblock %}

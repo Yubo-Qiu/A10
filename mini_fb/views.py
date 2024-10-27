@@ -12,6 +12,8 @@ from .models import Profile
 from .models import StatusMessage, Image
 from django.views.generic.edit import UpdateView
 from django.views.generic import DeleteView
+from django.views import View
+from django.shortcuts import redirect
 
 class ShowAllProfilesView(ListView):
     model = Profile
@@ -66,3 +68,18 @@ class DeleteStatusMessageView(DeleteView):
     def get_success_url(self):
         profile_id = self.object.profile.pk
         return reverse_lazy('show_profile', kwargs={'pk': profile_id})
+    
+class CreateFriendView(View):
+    def dispatch(self, request, *args, **kwargs):
+        profile = Profile.objects.get(pk=kwargs['pk'])
+        other_profile = Profile.objects.get(pk=kwargs['other_pk'])
+        profile.add_friend(other_profile)
+        return redirect('show_profile', pk=profile.pk)
+    
+class ShowFriendSuggestionsView(DetailView):
+    model = Profile
+    template_name = 'mini_fb/friend_suggestions.html'
+
+class ShowNewsFeedView(DetailView):
+    model = Profile
+    template_name = 'mini_fb/news_feed.html'

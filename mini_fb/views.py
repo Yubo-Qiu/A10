@@ -15,6 +15,8 @@ from django.views.generic import DeleteView
 from django.views import View
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404
 
 
 class ShowAllProfilesView(ListView):
@@ -86,13 +88,19 @@ class CreateStatusMessageView(CreateView):
         return reverse_lazy("show_profile", kwargs={"pk": self.kwargs["pk"]})
 
 
-class UpdateProfileView(UpdateView):
+class UpdateProfileView(LoginRequiredMixin, UpdateView):
     model = Profile
-    form_class = UpdateProfileForm
     template_name = "mini_fb/update_profile_form.html"
+    fields = [
+        "first_name",
+        "last_name",
+        "city",
+        "email",
+        "profile_image_url",
+    ]  # Specify fields for updating
 
-    def get_success_url(self):
-        return reverse_lazy("show_profile", kwargs={"pk": self.object.pk})
+    def get_object(self, queryset=None):
+        return Profile.objects.get(user=self.request.user)
 
 
 class DeleteStatusMessageView(DeleteView):
@@ -105,18 +113,45 @@ class DeleteStatusMessageView(DeleteView):
 
 
 class CreateFriendView(View):
-    def dispatch(self, request, *args, **kwargs):
-        profile = Profile.objects.get(pk=kwargs["pk"])
-        other_profile = Profile.objects.get(pk=kwargs["other_pk"])
-        profile.add_friend(other_profile)
-        return redirect("show_profile", pk=profile.pk)
+    def get(self, request, other_pk):
+        # Get the profile of the logged-in user
+        user_profile = get_object_or_404(Profile, user=request.user)
+
+        # Get the profile of the user to be added as a friend
+        friend_profile = get_object_or_404(Profile, pk=other_pk)
+
+        # Add friend if not already friends
+        user_profile.add_friend(friend_profile)
+
+        # Redirect back to the friend suggestions page or wherever appropriate
+        return redirect("friend_suggestions")
 
 
 class ShowFriendSuggestionsView(DetailView):
     model = Profile
     template_name = "mini_fb/friend_suggestions.html"
 
+    def get_object(self, queryset=None):
+        # Get the Profile associated with the logged-in user
+        return Profile.objects.get(user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        # Add friend suggestions to the context
+        context = super().get_context_data(**kwargs)
+        profile = self.get_object()
+        context["friend_suggestions"] = profile.get_friend_suggestions()
+        return context
+
 
 class ShowNewsFeedView(DetailView):
-    model = Profile
     template_name = "mini_fb/news_feed.html"
+    context_object_name = "news_feed"
+
+    def get_object(self, queryset=None):
+        # Retrieve the Profile associated with the logged-in user
+        return Profile.objects.get(user=self.request.user)
+
+    def get_queryset(self):
+        # Use the get_news_feed method to get the news feed for the user's profile
+        user_profile = self.get_object()
+        return user_profile.get_news_feed()

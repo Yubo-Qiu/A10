@@ -13,7 +13,9 @@
             {% for img in message.get_images %}
                 <img src="{{ img.image_file.url }}" alt="Image" style="width:100px; height:100px;">
             {% endfor %}
+            {% if user == profile.user %}
             <a href="{% url 'delete_status' message.pk %}">Delete</a>
+            {% endif %}
         </li>
     {% empty %}
         <li>No status messages yet.</li>
@@ -27,8 +29,10 @@
         <li>No friends yet.</li>
     {% endfor %}
 </ul>
-<a href="{% url 'friend_suggestions' object.pk %}">Friend Suggestions</a>
-<a href="{% url 'create_status' object.pk %}">Post a Status Message</a>
-<a href="{% url 'update_profile' object.pk %}">Update Profile</a>
-<a href="{% url 'news_feed' object.pk %}">View News Feed</a>
+{% if user == profile.user %}
+    <a href="{% url 'friend_suggestions' object.pk %}">Friend Suggestions</a>
+    <a href="{% url 'create_status' object.pk %}">Post a Status Message</a>
+    <a href="{% url 'update_profile' object.pk %}">Update Profile</a>
+    <a href="{% url 'news_feed' object.pk %}">View News Feed</a>
+{% endif %}
 {% endblock %}

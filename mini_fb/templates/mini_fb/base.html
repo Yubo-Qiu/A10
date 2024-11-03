@@ -12,12 +12,22 @@
     <header>
         <h1>
             <a href="{% url 'show_all_profiles' %}" style="color: inherit; text-decoration: none;">
-                Mini Facebook
+                Mini Facebook 
             </a>
         </h1>
+        {% if user.is_authenticated %}
+            <p>Logged in as {{ user.username }}</p>
+            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" style="background:none; border:none; color:blue; text-decoration:underline; cursor:pointer;">Logout</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
     </header>    
     <main>
-        {% block content %}{% endblock %}
+        {% block content %}
+        {% endblock %}
     </main>
     <footer>
         <p>&copy; 2024 Mini Facebook</p>

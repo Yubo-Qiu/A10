@@ -18,10 +18,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-urlpatterns = [ 
-    path("admin/", admin.site.urls), 
-    path("", include("mini_fb.urls")),
-    path('restaurant/', include('restaurant.urls')),
-    path('blog/', include('blog.urls')),
-    path('mini_fb/', include('mini_fb.urls')),
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("", include("voter_analytics.urls")),
+    path("restaurant/", include("restaurant.urls")),
+    path("blog/", include("blog.urls")),
+    path("mini_fb/", include("mini_fb.urls")),
+    path("voter_analytics/", include("voter_analytics.urls")),
 ]

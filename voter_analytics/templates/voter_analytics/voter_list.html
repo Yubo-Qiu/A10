@@ -1,0 +1,109 @@
+{% extends "voter_analytics/base.html" %}
+
+{% block content %}
+<h1>Voter List</h1>
+<a href="{% url 'graphs' %}">Go to Graphs</a>
+<form method="get">
+    <!-- Party Affiliation Dropdown -->
+    <label>Party Affiliation:</label>
+    <select name="party_affiliation">
+        <option value="">All</option>
+        <option value="D">Democrat</option>
+        <option value="R">Republican</option>
+        <option value="U">Unaffiliated</option>
+        <option value="CC">Constitution Party</option>
+        <option value="L">Libertarian</option>
+        <option value="J">Justice Party</option>
+        <option value="T">Tea Party</option>
+        <option value="O">Other</option>
+        <option value="A">American Party</option>
+        <option value="Q">Green Party</option>
+        <option value="S">Socialist Party</option>
+        <option value="G">Grassroots Party</option>
+        <option value="X">Unknown Party</option>
+        <option value="AA">Alliance Party</option>
+        <option value="Z">Reform Party</option>
+        <option value="FF">Freedom Party</option>
+        <option value="GG">Gotham Party</option>
+        <option value="V">Veterans Party</option>
+        <option value="K">Kindred Party</option>
+        <option value="HH">Humanist Party</option>
+        <option value="P">Progressive Party</option>
+        <option value="E">Equality Party</option>
+        <option value="H">Health Party</option>
+        <option value="Y">Youth Party</option>
+        <option value="WW">Workers Party</option>
+        <option value="EE">Environmental Party</option>
+    </select>
+
+
+    <!-- Minimum Year of Birth -->
+    <label>Minimum Year of Birth:</label>
+    <select name="min_year">
+        <option value="">Any</option>
+        {% for year in years %}
+            <option value="{{ year }}">{{ year }}</option>
+        {% endfor %}
+    </select>
+
+    <!-- Maximum Year of Birth -->
+    <label>Maximum Year of Birth:</label>
+    <select name="max_year">
+        <option value="">Any</option>
+        {% for year in years %}
+            <option value="{{ year }}">{{ year }}</option>
+        {% endfor %}
+    </select>
+
+
+    <!-- Voter Score Dropdown -->
+    <label>Voter Score:</label>
+    <select name="voter_score">
+        <option value="">Any</option>
+        {% for score in voter_scores %}
+            <option value="{{ score }}">{{ score }}</option>
+        {% endfor %}
+    </select>
+
+    <!-- Election Participation Checkboxes -->
+    <label>Voted in 2020 State Election:</label>
+    <input type="checkbox" name="v20state" value="on">
+
+    <label>Voted in 2021 Town Election:</label>
+    <input type="checkbox" name="v21town" value="on">
+
+    <label>Voted in 2021 Primary Election:</label>
+    <input type="checkbox" name="v21primary" value="on">
+
+    <label>Voted in 2022 General Election:</label>
+    <input type="checkbox" name="v22general" value="on">
+
+    <label>Voted in 2023 Town Election:</label>
+    <input type="checkbox" name="v23town" value="on">
+
+    <!-- Submit Button -->
+    <button type="submit">Filter</button>
+</form>
+
+<!-- Voter List -->
+<ul>
+{% for voter in object_list %}
+        <a href="{% url 'voter_detail' voter.pk %}">
+            <li>{{ voter.first_name }} {{ voter.last_name }}</a> - {{ voter.party_affiliation }} - Score: {{ voter.voter_score }}</li>
+        
+{% endfor %}
+</ul>
+
+<!-- Pagination Controls -->
+<div>
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Next</a>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock content %}

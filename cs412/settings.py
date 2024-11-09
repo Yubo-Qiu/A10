@@ -30,37 +30,36 @@ SECRET_KEY = "django-insecure-pzm-wts-mr+32+6n58*hk+bpxpe3jnd0$0asq-5rxkjv9*-tdx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',  # This is necessary
-    'django.contrib.messages',  # This is necessary
-    'django.contrib.staticfiles',
-    'quotes',  # Your custom app
-    'restaurant',  # Your custom app
-    'blog',
-    'mini_fb',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",  # This is necessary
+    "django.contrib.messages",  # This is necessary
+    "django.contrib.staticfiles",
+    "quotes",  # Your custom app
+    "restaurant",  # Your custom app
+    "blog",
+    "mini_fb",
+    "voter_analytics",
 ]
 
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',  # Required for sessions
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',  # Required for authentication
-    'django.contrib.messages.middleware.MessageMiddleware',  # Required for messages
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # WhiteNoise should be placed after the security middleware
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",  # Required for sessions
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",  # Required for authentication
+    "django.contrib.messages.middleware.MessageMiddleware",  # Required for messages
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # WhiteNoise should be placed after the security middleware
 ]
-
 
 
 ROOT_URLCONF = "cs412.urls"
@@ -119,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'America/New_York'  # Replace with your desired time zone
+TIME_ZONE = "America/New_York"  # Replace with your desired time zone
 USE_TZ = True
 
 USE_I18N = True
@@ -129,6 +128,9 @@ USE_I18N = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "/static/"
+STATICFILES_DIRS = [
+    BASE_DIR / "voter_analytics/static",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -137,5 +139,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 import os
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")

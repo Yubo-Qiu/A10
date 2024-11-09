@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voter Analytics - By Yubo</title>
+
+    <!-- Load Static Files -->
+    {% load static %}
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'voter_analytics/css/styles.css' %}">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <h1>Voter Analytics - By Yubo</h1>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{% url 'voters' %}">Voter List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{% url 'graphs' %}">Graphs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{% url 'admin:index' %}">Admin</a>
+                    </li>
+                </ul>
+                <span class="nav-link text-light">
+                    Powered by Django
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="container my-4">
+        {% block content %}
+        <!-- Child template content will be injected here -->
+        <h2>Welcome to Voter Analytics</h2>
+        <p>Select a section from the navbar to get started.</p>
+        {% endblock content %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Voter Analytics - By Yubo | © 2024</p>
+        </div>
+    </footer>
+
+</body>
+</html>

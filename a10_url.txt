@@ -1,1 +1,1 @@
-https://cs412-yubo-minifb-77964a9be55f.herokuapp.com/
+https://voter-analytics-f8503a7158ea.herokuapp.com

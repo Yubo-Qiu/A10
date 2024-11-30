@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="journal-detail-container">
+    <h1 class="journal-title">{{ journal.title }}</h1>
+    <div class="journal-meta">
+        <p><strong>Author:</strong> {{ journal.author }}</p>
+        <p><strong>Status:</strong> {{ journal.status }}</p>
+    </div>
+    <div class="journal-content">
+        <p>{{ journal.content }}</p>
+    </div>
+
+    {% if can_edit_blogs %}
+    <div class="journal-actions">
+        <a href="{% url 'journal-update' journal.pk %}" class="btn btn-warning">Update</a>
+        <a href="{% url 'journal-delete' journal.pk %}" class="btn btn-danger">Delete</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<body>
+<section class="home-slider">
+    <section class="background-section">
+
+    </section>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            {% for journal in journals %}
+            <div class="swiper-slide">
+                <a href="{% url 'journal-detail' journal.pk %}">
+                    <div class="slide-content">
+                        <img
+                            src="{{ journal.featured_image.url }}"
+                            alt="{{ journal.title }}"
+                            class="slide-image"
+                        />
+                        <div class="slide-text">
+                            <h2>{{ journal.title }}</h2>
+                            <p>{{ journal.content|truncatewords:15 }}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="swiper-pagination"></div>
+</section>
+<div class="home-introduction">
+    <h1>Welcome to The Fisherman's Bastion</h1>
+    <p>Our mission is to create impactful solutions that drive progress and innovation. Explore our journals, projects, and the incredible work our team is doing to make a difference.</p>
+    <h2>Global Vision, Local Action</h2>
+    <p>We are a passionate team of young individuals dedicated to making a global impact. With members from nearly 20 countries, we bring diverse perspectives to create innovative solutions for challenges that transcend borders.</p>
+    <h2>Driven by Diversity, United by Purpose</h2>
+    <p>Our team reflects the world we aim to impact, with voices and talents from nearly 20 different countries. Together, we share a unified mission: to create sustainable solutions that inspire progress and leave a lasting legacy.
+        Let me know if you'd like to refine these further!</p>
+    <h2>Collaboration at the Heart of Innovation</h2>
+    <p>Our projects are powered by the strength of our international collaborations. Supported by partners and collaborators from various fields, we strive to bridge ideas, cultures, and expertise to create meaningful change on a global scale.</p>
+</div>
+<div class="collaborators-section">
+    <h2>Our Collaborators</h2>
+    <div class="collaborators-logos">
+        {% for collaborator in collaborators %}
+        <div class="collaborator-logo">
+            {% if collaborator.website %}
+            <a href="{{ collaborator.website }}" target="_blank" rel="noopener noreferrer">
+                {% if collaborator.logo %}
+                <img src="{{ collaborator.logo.url }}" alt="{{ collaborator.name }}">
+                {% else %}
+                <p>{{ collaborator.name }}</p> <!-- Fallback if no logo -->
+                {% endif %}
+            </a>
+            {% else %}
+            {% if collaborator.logo %}
+            <img src="{{ collaborator.logo.url }}" alt="{{ collaborator.name }}">
+            {% else %}
+            <p>{{ collaborator.name }}</p> <!-- Fallback if no logo -->
+            {% endif %}
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const swiper = new Swiper(".swiper-container", {
+    loop: true, // Enable loop for continuous sliding
+    centeredSlides: true, // Center the active slide
+    slidesPerView: 1.5, // Show part of the adjacent slides
+    spaceBetween: 10, // Space between slides
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false,
+    },
+    on: {
+      slideChange: function () {
+        console.log("Slide changed");
+      },
+    },
+  });
+});
+</script>
+</body>
+{% endblock %}

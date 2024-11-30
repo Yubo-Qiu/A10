@@ -1,0 +1,570 @@
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ececec; /* Medium gray */
+    color: #333;
+    margin: 0;
+    
+}
+
+html, body {
+    overscroll-behavior: none; /* Prevent scroll chaining and bounce */
+    height: 100%;
+}
+
+.background-section {
+    position: absolute; /* Ensures it doesn't affect the document flow */
+    top: 0;
+    left: 0;
+    width: 100%; /* Covers the entire width */
+    height: 71.5%; /* Covers the entire height */
+    background-color: #161616; /* Black background */
+    z-index: -1; /* Lower z-index to sit behind everything */
+}
+
+
+/* Navbar Styling */
+.navbar {
+    background-color: #000000;
+    color: white;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Logo and Organization Name */
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.org-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex; /* Ensures the navigation links align horizontally */
+    align-items: center; /* Vertically centers items */
+    gap: 15px; /* Adds spacing between the links */
+    overflow: hidden; /* Prevents any child elements from causing overflow */
+}
+
+.nav-links ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-links ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    transition: color 0.3s;
+    overflow: hidden;
+}
+
+.nav-links ul li a:hover {
+    color: #ffcc00;
+}
+
+.nav-links img {
+    width: 20px; /* Set the desired size */
+    height: 20px; /* Ensure a square shape */
+    border-radius: 50%; /* Make it circular */
+    object-fit: cover; /* Proper cropping */
+    margin-right: 8px; /* Add spacing between the image and text */
+    display: inline-block; /* Align the image with text */
+    vertical-align: middle; /* Align with the text */
+    overflow: hidden;
+}
+
+
+/* Footer Styling */
+.footer {
+    background-color: #000000;
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    position: relative;
+    bottom: 0;
+}
+
+/* Home Page Styling */
+.home-container {
+    padding-top: 1rem;
+    text-align: center;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+}
+
+.home-title {
+    font-size: 36px;
+    color: #004080;
+    margin-bottom: 20px;
+}
+
+.home-description {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.home-nav {
+    margin-top: 20px;
+}
+
+.home-nav-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.home-nav-link {
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    background-color: #004080;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.home-nav-link:hover {
+    background-color: #ffcc00;
+    transform: scale(1.05);
+}
+
+/* Swiper Container */
+.swiper-container {
+    width: 100%;
+    height: 450px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    border: none; /* Remove rounded edges */
+}
+
+/* Swiper Slides */
+/* Base styling for all slides */
+.swiper-slide {
+    filter: brightness(50%); /* Darken non-active slides */
+    transform: scale(0.9); /* Slightly smaller for adjacent slides */
+    transition: transform 0.3s ease, filter 0.3s ease; /* Smooth transition */
+    overflow: hidden; /* Prevent overflow of images */
+}
+
+/* Styling for the active slide */
+.swiper-slide-active {
+    filter: brightness(100%); /* No darkening for the active slide */
+    transform: scale(1); /* Full size for the active slide */
+}
+
+
+/* Slide Image */
+.slide-image {
+    width: 80%;
+    height: 100%;
+    object-fit: cover; /* Automatically adjust to fit the container */
+}
+
+/* Slide Text Overlay */
+.slide-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.6); /* Dark overlay for readability */
+    color: white;
+    padding: 10px 20px;
+}
+
+.slide-text h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.slide-text p {
+    font-size: 16px;
+    margin: 0;
+}
+
+/* Swiper Pagination (Dots) */
+.swiper-pagination {
+    padding-bottom: 15rem;
+    left: 50%;
+    transform: translateX(-50%); /* Center it horizontally */
+    text-align: center;
+    z-index: 10; /* Ensure it appears above other elements */
+}
+
+.swiper-pagination-bullet {
+    background-color: #f0f0f0 !important; /* Dark gray for dots */
+    opacity: 0.8;
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    border-radius: 50%;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    transform: scale(1.3); /* Highlight the active dot */
+    background-color: #ffffff !important; /* Yellow for the active dot */
+}
+
+/* Swiper Progress Bar */
+.swiper-progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.swiper-progress {
+    height: 100%;
+    background: #ffcc00;
+    width: 0%;
+    transition: width 0.3s ease-out; /* Animation for the progress bar */
+}
+
+.swiper-wrapper {
+    display: flex; /* Ensures slides are displayed in a row */
+    transition: transform 0.3s ease-in-out; /* Smooth transition when sliding */
+    will-change: transform; /* Optimize for better performance */
+}
+
+
+.home-slider {
+    margin: 20px auto; /* Center the section and add some space */
+    max-width: 100%; /* Restrict the width */
+    overflow: hidden; /* Ensure no overflow issues */
+}
+
+.home-introduction {
+    text-align: center;
+    margin: 30px auto;
+    padding: 20px;
+    padding-top: 4rem;
+    color: #333;
+    border-radius: 8px;
+    max-width: 800px; /* Limit the width for better readability */
+}
+
+.home-introduction h1 {
+    font-size: 36px;
+    color: #000000; /* Matches the theme */
+    margin-bottom: 20px;
+}
+
+.home-introduction p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* Style for the current slide */
+.swiper-slide-active .slide-image {
+    filter: none; /* No darkening for the active slide */
+    transform: scale(1); /* Normal size */
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Style for adjacent slides */
+.swiper-slide {
+    filter: brightness(50%); /* Darken adjacent slides */
+    transform: scale(0.9); /* Slightly smaller */
+    transition: transform 0.3s ease, filter 0.3s ease;
+    overflow: hidden; /* Prevent image overflow */
+}
+
+/* Centered active slide effect */
+.swiper-slide-active {
+    filter: brightness(100%); /* Remove darkening for the active slide */
+    transform: scale(1.1); /* Slightly larger for emphasis */
+}
+
+/* Ensure images don't break layout */
+.swiper-slide img {
+    object-fit: cover; /* Keep aspect ratio while filling the container */
+    width: 100%;
+    height: 100%;
+}
+
+.collaborators-section {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f9f9f9; /* Light background for contrast */
+    margin-top: 50px;
+}
+
+.collaborators-section h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.collaborators-logos {
+    display: flex;
+    flex-wrap: wrap; /* Allows logos to wrap on smaller screens */
+    justify-content: center; /* Centers the logos */
+    gap: 20px; /* Space between logos */
+}
+
+.collaborator-logo img {
+    width: 150px; /* Adjust as needed */
+    height: 150px;
+    object-fit: contain; /* Maintains aspect ratio */
+    border-radius: 8px; /* Optional rounded corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.3s ease;
+}
+
+.collaborator-logo img:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.collaborator-logo p {
+    font-size: 16px;
+    color: #555;
+}
+
+.profile-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Circular profile picture */
+    margin-right: 10px;
+    object-fit: cover; /* Ensure proper cropping */
+}
+
+
+/* Profile Detail Page Styling */
+.profile-detail-container {
+    max-width: 800px;
+    margin: 0 auto; /* Center the container */
+    text-align: center; /* Center-align content */
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding-bottom: 7rem;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.profile-title {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.profile-image-container {
+    margin: 20px 0;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Circular image */
+    object-fit: cover; /* Ensure the image is properly cropped */
+    border: 3px solid #333; /* Optional border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for effect */
+}
+
+.profile-info {
+    margin: 20px 0;
+    text-align: left; /* Align text to the left */
+    background-color: #f2f2f2; 
+    padding: 20px;
+}
+
+.profile-info p, .profile-info ul {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+.profile-info a {
+    color: #004080; /* Link color */
+    text-decoration: none;
+}
+
+.profile-info a:hover {
+    text-decoration: underline;
+}
+
+.profile-actions {
+    margin-top: 20px;
+}
+
+.profile-edit-button,
+.profile-back-button {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #000000;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.profile-edit-button:hover,
+.profile-back-button:hover {
+    background-color: #949494;
+    transform: scale(1.05);
+}
+
+
+/* Team Page Styling */
+.team-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+    padding-bottom: 49vh;
+}
+
+.team-container h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.team-list {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: center;
+    list-style: none; /* Remove default list styling */
+    padding: 0;
+    gap: 20px; /* Add space between items */
+}
+
+.team-member {
+    text-align: center; /* Center-align each team member's content */
+    max-width: 150px; /* Restrict the width of each team member block */
+}
+
+.team-member a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.team-profile-photo {
+    width: 100px; /* Ensure all profile images are the same size */
+    height: 100px;
+    object-fit: cover; /* Maintain aspect ratio while filling the box */
+    border-radius: 50%; /* Make the images circular */
+    border: 2px solid #ccc; /* Optional border for better visibility */
+    margin-bottom: 10px; /* Space between image and name */
+    justify-content: center;
+}
+
+.team-name {
+    display: block;
+    font-size: 16px;
+    font-weight: bold; /* Make the name bold */
+    color: #333;
+    margin-bottom: 5px; /* Space between name and role */
+}
+
+.team-role {
+    display: block;
+    font-size: 14px;
+    color: #777; /* Subtle color for the role */
+}
+
+/* Journal Detail Page Styling */
+.journal-detail-container {
+    max-width: 800px;
+    margin: 0 auto; /* Center horizontally */
+    text-align: center; /* Center all content horizontally */
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.journal-title {
+    font-size: 36px; /* Large font for title */
+    font-weight: bold; /* Bold text for emphasis */
+    color: #333; /* Dark color for readability */
+    margin-bottom: 10px; /* Space below the title */
+}
+
+.journal-meta {
+    display: flex; /* Align items horizontally */
+    justify-content: flex-end; /* Align to the right */
+    gap: 20px; /* Add space between meta elements */
+    font-size: 14px; /* Slightly smaller text */
+    color: #555; /* Subtle color */
+    margin-bottom: 20px; /* Space below meta section */
+}
+
+.journal-meta p {
+    margin: 0; /* Remove default margin */
+}
+
+.journal-content {
+    font-size: 18px; /* Slightly larger text for readability */
+    line-height: 1.6; /* Comfortable line spacing */
+    color: #444; /* Dark gray for content */
+    text-align: justify; /* Justify content for cleaner layout */
+    margin-top: 20px; /* Space above the content */
+}
+
+.journal-actions {
+    margin-top: 20px; /* Space above the actions */
+}
+
+.journal-actions .btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #000000;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.journal-actions .btn:hover {
+    background-color: #949494;
+    transform: scale(1.05);
+}
+

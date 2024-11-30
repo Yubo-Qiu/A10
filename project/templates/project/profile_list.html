@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="team-container">
+    <h1>Our Team</h1>
+    <ul class="team-list">
+        {% for profile in profiles %}
+            <li class="team-member">
+                <a href="{{ profile.get_absolute_url }}">
+                    <img src="{{ profile.profile_image.url | default:'/static/project/default-profile.jpg' }}" 
+                         alt="{{ profile.user.username }}" class="team-profile-photo">
+                    <span class="team-name">{{ profile.user.username }}</span>
+                    <span class="team-role">{{ profile.role }}</span>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+

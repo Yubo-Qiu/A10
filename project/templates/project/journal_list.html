@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Published Journals</h1>
+<ul>
+    {% for journal in journals %}
+        <li>
+            <a href="{{ journal.get_absolute_url }}">{{ journal.title }}</a> - {{ journal.author }}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

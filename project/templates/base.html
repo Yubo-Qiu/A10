@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TFB{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'project/styles.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="logo-container">
+                <img src="{% static 'project/logo.png' %}" alt="Organization Logo" class="logo">
+                <span class="org-name">The Fisherman's Bastion</span>
+            </div>
+            <nav class="nav-links">
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'journal-list' %}">Journals</a></li>
+                    <li><a href="{% url 'profile-list' %}">Profiles</a></li>
+                    <li><a href="{% url 'project-list' %}">Projects</a></li>
+                    {% if request.user.is_authenticated %}
+                    <li style="overflow: hidden; white-space: nowrap;">
+                        <a href="{% url 'profile-detail' request.user.project_profiles.first.pk %}">
+                            <img src="{{ request.user.project_profiles.first.profile_image.url }}"
+                                 alt="{{ request.user.username }}">
+                            Hi, {{ request.user.username }}
+                        </a>
+                    </li>                    
+                    <li >
+                        <form method="post" action="{% url 'logout' %}" id="logout-form">
+                            {% csrf_token %}
+                            <a href="#" onclick="document.getElementById('logout-form').submit();">Logout</a>
+                        </form>
+                    </li>                    
+                    {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 The Fisherman's Bastion. All rights reserved.</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+</body>
+</html>

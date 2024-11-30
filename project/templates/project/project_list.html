@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Our Projects</h1>
+<ul>
+    {% for project in projects %}
+        <li>
+            <a href="{{ project.get_absolute_url }}">
+                <h2>{{ project.title }}</h2>
+            </a>
+            <p>{{ project.description|truncatewords:30 }}</p>
+        </li>
+    {% endfor %}
+</ul>
+{% if not projects %}
+    <p>No projects available.</p>
+{% endif %}
+{% endblock %}

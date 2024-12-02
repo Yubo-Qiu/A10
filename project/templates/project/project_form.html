@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="project-form-container">
+    <h1 class="project-form-title">{% if project %}Edit{% else %}Create{% endif %} Project</h1>
+    <form method="post" enctype="multipart/form-data" class="project-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+    <div class="back-button">
+        <a href="{% url 'project-list' %}" class="btn btn-secondary">Back to Projects</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,12 +1,19 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block content %}
-<div class="form-container">
-    <h2>Edit Your Profile</h2>
+<div class="profile-update-container">
+    <h2>Update Profile</h2>
+    <!-- Display Current Profile Image -->
+    {% if request.user.project_profiles.first.profile_image %}
+    <div class="current-profile-image-container">
+        <img src="{{ request.user.project_profiles.first.profile_image.url }}" alt="Current Profile Image" class="current-profile-image">
+    </div>
+    {% endif %}
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Save Changes</button>
     </form>
+    <a href="{% url 'profile-detail' request.user.project_profiles.first.pk %}" class="btn btn-secondary">Cancel</a>
 </div>
 {% endblock %}

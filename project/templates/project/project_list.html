@@ -1,18 +1,80 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Our Projects</h1>
-<ul>
-    {% for project in projects %}
-        <li>
-            <a href="{{ project.get_absolute_url }}">
-                <h2>{{ project.title }}</h2>
-            </a>
-            <p>{{ project.description|truncatewords:30 }}</p>
-        </li>
-    {% endfor %}
-</ul>
-{% if not projects %}
-    <p>No projects available.</p>
-{% endif %}
+<div class="project-list-container">
+    <h1 class="project-list-h1">Our Projects</h1>
+
+    <!-- Filter Form -->
+    <form method="get" class="filter-form">
+        <div class="filter-item">
+            <label for="year">Year:</label>
+            <select name="year" id="year">
+                <option value="">All Years</option>
+                {% for year in years %}
+                    <option value="{{ year.year }}" {% if request.GET.year == year.year|stringformat:"s" %}selected{% endif %}>
+                        {{ year.year }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="filter-item">
+            <label for="tag">Tag:</label>
+            <select name="tag" id="tag">
+                <option value="">All Tags</option>
+                {% for tag in tags %}
+                    <option value="{{ tag.name }}" {% if request.GET.tag == tag.name %}selected{% endif %}>
+                        {{ tag.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="filter-item">
+            <label for="collaborator">Collaborator:</label>
+            <select name="collaborator" id="collaborator">
+                <option value="">All Collaborators</option>
+                {% for collaborator in collaborators %}
+                    <option value="{{ collaborator }}" {% if request.GET.collaborator == collaborator %}selected{% endif %}>
+                        {{ collaborator }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="filter-item">
+            <label for="project_type">Project Type:</label>
+            <select name="project_type" id="project_type">
+                <option value="">All Types</option>
+                {% for type, type_label in project_types %}
+                    <option value="{{ type }}" {% if request.GET.project_type == type %}selected{% endif %}>
+                        {{ type_label }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </form>
+
+    <!-- Project List -->
+    <ul class="project-list">
+        {% for project in projects %}
+            <li>
+                <a href="{{ project.get_absolute_url }}" class="project-title">
+                    {{ project.title }}
+                </a>
+                <span class="project-description">
+                    {{ project.description|truncatewords:30 }}
+                </span>
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% if can_edit_projects %}
+    <div class="create-button">
+        <a href="{% url 'project-create' %}" class="btn btn-primary">Create New Project</a>
+    </div>
+    {% endif %}
+    
+    {% if not projects %}
+        <p>No projects available.</p>
+    {% endif %}
+</div>
 {% endblock %}

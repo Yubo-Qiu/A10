@@ -15,6 +15,7 @@ from .views import (
     ProjectCreateView,
     ProjectUpdateView,
     ProjectDeleteView,
+    journals_per_day,
 )
 from django.contrib.auth import views as auth_views
 
@@ -48,4 +49,11 @@ urlpatterns = [
     ),
     path("logout/", auth_views.LogoutView.as_view(next_page="home"), name="logout"),
     path("register/", RegisterView.as_view(), name="register"),
+    path(
+        "projects/<int:pk>/update/", ProjectUpdateView.as_view(), name="project-update"
+    ),
+    path(
+        "projects/<int:pk>/delete/", ProjectDeleteView.as_view(), name="project-delete"
+    ),
+    path("journals_per_day/", journals_per_day, name="journals_per_day"),
 ]

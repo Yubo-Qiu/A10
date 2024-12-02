@@ -454,7 +454,7 @@ html, body {
     margin: 0 auto;
     text-align: center;
     padding: 20px;
-    padding-bottom: 49vh;
+    padding-bottom: 51vh;
 }
 
 .team-container h1 {
@@ -510,7 +510,7 @@ html, body {
 .journal-detail-container {
     max-width: 800px;
     margin: 0 auto; /* Center horizontally */
-    text-align: center; /* Center all content horizontally */
+    text-align: center; /* Center all content horizontally */ 
     padding: 20px;
     background-color: #f9f9f9; /* Light background for contrast */
     border-radius: 8px;
@@ -568,3 +568,716 @@ html, body {
     transform: scale(1.05);
 }
 
+/* Journals List Container */
+.journal-list-container {
+    text-align: center; /* Center everything horizontally */
+    margin: 20px auto; /* Add vertical spacing */
+    max-width: 800px; /* Limit the width for better readability */
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for effect */
+    padding-bottom: 25rem;
+}
+
+/* Individual Journal Items */
+.journal-list {
+    list-style: none; /* Remove default bullets */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+.journal-list li {
+    margin: 15px 0; /* Add space between items */
+    font-size: 18px; /* Adjust font size */
+}
+
+.journal-list a {
+    font-weight: bold; /* Make journal title bold */
+    text-decoration: none; /* Remove underline */
+    color: #333; /* Dark color for title */
+    transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.journal-list a:hover {
+    color: #a7a7a7; /* Change color on hover */
+}
+
+.journal-author {
+    display: block; /* Move author to a new line */
+    font-size: 14px; /* Smaller font for author */
+    color: gray; /* Gray color for author */
+    margin-top: 5px; /* Space above author */
+}
+
+.back-button {
+    margin-top: 20px; /* Add some space above the button */
+    text-align: center; /* Center the button horizontally */
+}
+
+.back-button .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #000000; /* Dark color for the button */
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.back-button .btn:hover {
+    background-color: #555; /* Slightly lighter color on hover */
+    transform: scale(1.05); /* Add a hover effect */
+}
+
+/* Project List Container */
+.project-list-container {
+    margin: 20px auto; /* Add vertical spacing */
+    max-width: 800px; /* Limit the width for better readability */
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for effect */
+    padding-bottom: 25rem;
+}
+
+.project-list-h1 {
+    text-align: center; /* Center everything horizontally */
+}
+
+/* Individual Project Items */
+.project-list {
+    text-align: left; /* Center everything horizontally */
+    list-style: none; /* Remove default bullets */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+.project-list li {
+    margin: 15px 0; /* Add space between items */
+    font-size: 18px; /* Adjust font size */
+}
+
+.project-list a.project-title {
+    font-weight: bold; /* Make project title bold */
+    text-decoration: none; /* Remove underline */
+    color: #333; /* Dark color for title */
+    transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.project-list a.project-title:hover {
+    color: #a7a7a7; /* Change color on hover */
+}
+
+.project-description {
+    display: block; /* Move description to a new line */
+    font-size: 14px; /* Smaller font for description */
+    color: gray; /* Gray color for description */
+    margin-top: 5px; /* Space above description */
+}
+
+/* Project Detail Page Styling */
+.project-detail-container {
+    max-width: 800px;
+    margin: 0 auto; /* Center horizontally */
+    text-align: center; /* Center all content horizontally */
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.project-meta {
+    text-align: left; /* Align text to the left for meta info */
+    font-size: 14px; /* Slightly smaller text */
+    color: #555; /* Subtle color */
+    margin-bottom: 20px; /* Space below meta section */
+}
+
+.project-meta ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+.project-meta ul li {
+    margin-bottom: 5px; /* Add spacing between list items */
+}
+
+.project-description {
+    font-size: 18px; /* Slightly larger text for readability */
+    line-height: 1.6; /* Comfortable line spacing */
+    color: #444; /* Dark gray for content */
+    text-align: justify; /* Justify content for cleaner layout */
+    margin-top: 20px; /* Space above the content */
+    margin-left: 20px;
+}
+
+.back-button {
+    margin-top: 20px; /* Space above the button */
+    text-align: center; /* Center the button horizontally */
+}
+
+.back-button .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #000000; /* Dark color for the button */
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.back-button .btn:hover {
+    background-color: #555; /* Slightly lighter color on hover */
+    transform: scale(1.05); /* Add a hover effect */
+}
+
+/* Journal List */
+.journal-list {
+    list-style: none; /* Remove bullets */
+    padding: 0;
+    margin: 0;
+}
+
+.journal-list li {
+    margin: 15px 0; /* Space between items */
+    font-size: 18px;
+}
+
+/* Journal Item */
+.journal-item {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center; /* Align title and time */
+
+}
+
+/* Journal Title */
+.journal-list-title {
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333; /* Dark color */
+    transition: color 0.3s ease;
+}
+
+/* Journal Created Time */
+.journal-created {
+    font-size: 14px;
+    color: gray;
+    margin-left: 20px;
+}
+
+/* Journal Author */
+.journal-author {
+    display: block;
+    font-size: 14px;
+    color: gray;
+    margin-top: 5px; /* Space above author */
+}
+
+/* Create Button */
+.create-button {
+    padding-top: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.create-button .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #000000;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.create-button .btn:hover {
+    background-color: #585858;
+    transform: scale(1.05);
+}
+
+.related-journals a {
+    display: inline-block; /* Makes the links look like buttons */
+    margin: 10px; /* Adds spacing between links */
+    padding: 8px 15px; /* Adds padding for better clickability */
+    text-decoration: none; /* Removes the underline */
+    color: #ffffff; /* Sets the text color */
+    background-color: #000000; /* Sets a nice background color */
+    border-radius: 5px; /* Rounds the corners */
+    font-family: 'Arial', sans-serif; /* Sets a clean font */
+    font-size: 14px; /* Sets the font size */
+    transition: background-color 0.3s ease; /* Adds hover animation */
+  }
+  
+  .related-journals a:hover {
+    background-color: #5d5d5d; /* Darkens the background on hover */
+  }
+
+
+  /* Journal Form Container */
+.journal-form-container {
+    max-width: 600px;
+    margin: 0 auto; /* Center horizontally */
+    text-align: center; /* Center-align content */
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 10rem;
+}
+
+/* Journal Form Title */
+.journal-form-title {
+    font-size: 28px; /* Larger font size */
+    font-weight: bold;
+    color: #333; /* Dark text color */
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+.journal-form {
+    text-align: left; /* Align form fields to the left */
+    margin: 20px auto; /* Add spacing around the form */
+}
+
+.journal-form button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #4e4e4e; /* Blue button */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.journal-form button:hover {
+    background-color: #9d9d9d; /* Darker blue on hover */
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Delete Journal Container */
+.delete-journal-container {
+    max-width: 600px;
+    margin: 0 auto; /* Center horizontally */
+    text-align: center; /* Center-align content */
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 28rem; 
+}
+
+/* Delete Journal Title */
+.delete-journal-title {
+    font-size: 28px; /* Larger font size */
+    font-weight: bold;
+    color: #333; /* Dark text color */
+    margin-bottom: 20px;
+}
+
+/* Delete Journal Message */
+.delete-journal-message {
+    font-size: 18px;
+    color: #555; /* Subtle color */
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+.delete-journal-form button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #d9534f; /* Danger red button */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.delete-journal-form button:hover {
+    background-color: #c9302c; /* Darker red on hover */
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Cancel Button */
+.cancel-button {
+    margin-top: 20px; /* Space above the button */
+    text-align: center; /* Center-align the cancel button */
+}
+
+.cancel-button .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #333; /* Dark button */
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.cancel-button .btn:hover {
+    background-color: #555; /* Slightly lighter color on hover */
+    transform: scale(1.05); /* Add hover effect */
+}
+
+/* Project Form Container */
+.project-form-container {
+    max-width: 600px;
+    margin: 0 auto; /* Center horizontally */
+    text-align: center; /* Center-align content */
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Project Form Title */
+.project-form-title {
+    font-size: 28px; /* Larger font size */
+    font-weight: bold;
+    color: #333; /* Dark text color */
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+.project-form {
+    text-align: left; /* Align form fields to the left */
+    margin: 20px auto; /* Add spacing around the form */
+}
+
+.project-form button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #000000; /* Blue button */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.project-form button:hover {
+    background-color: #545454; /* Darker blue on hover */
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Project Actions */
+.project-actions {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.project-actions .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.project-actions .btn-warning {
+    background-color: #f0ad4e; /* Warning yellow */
+}
+
+.project-actions .btn-warning:hover {
+    background-color: #ec971f;
+    transform: scale(1.05);
+}
+
+.project-actions .btn-danger {
+    background-color: #d9534f; /* Danger red */
+}
+
+.project-actions .btn-danger:hover {
+    background-color: #c9302c;
+    transform: scale(1.05);
+}
+
+/* Delete Project Container */
+.delete-project-container {
+    max-width: 600px;
+    margin: 0 auto; /* Center horizontally */
+    text-align: center; /* Center-align content */
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 28rem;
+}
+
+/* Delete Project Title */
+.delete-project-title {
+    font-size: 28px; /* Larger font size */
+    font-weight: bold;
+    color: #333; /* Dark text color */
+    margin-bottom: 20px;
+}
+
+/* Delete Project Message */
+.delete-project-message {
+    font-size: 18px;
+    color: #555; /* Subtle color */
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+.delete-project-form button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #d9534f; /* Danger red button */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.delete-project-form button:hover {
+    background-color: #c9302c; /* Darker red on hover */
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Filter Form Styling */
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.filter-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.filter-item label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.filter-item select {
+    padding: 5px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Filter Button */
+.filter-form button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #4e4e4e;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.filter-form button:hover {
+    background-color: #bababa;
+}
+
+/* Shared Styling for Login and Register Containers */
+.login-container, .register-container {
+    max-width: 800px;
+    margin: 50px auto; /* Center on the page */
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background for contrast */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for effect */
+    text-align: center; /* Center-align text and elements */
+    padding-bottom: 20rem;
+}
+
+.login-container h2, .register-container h2 {
+    font-size: 28px; /* Larger, bold heading */
+    font-weight: bold;
+    color: #333; /* Dark color for readability */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+.login-container form, .register-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between form fields */
+}
+
+.login-container button, .register-container button {
+    width: 100%; /* Full-width button */
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    background-color: #000000; /* Blue for primary buttons */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-container button:hover, .register-container button:hover {
+    background-color: #f5db55; /* Slightly darker on hover */
+}
+
+.login-container p, .register-container p {
+    margin-top: 15px; /* Space above the paragraph */
+    font-size: 14px;
+    color: #555;
+}
+
+.login-container p a, .register-container p a {
+    color: #006fcf; /* Link color */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.login-container p a:hover, .register-container p a:hover {
+    color: #656565; /* Darker link on hover */
+}
+
+/* Profile Update Form Container */
+.profile-update-container {
+    max-width: 700px;
+    margin: 50px auto; /* Center on the page */
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    text-align: left; /* Center-align text */
+}
+
+.profile-update-container h2 {
+    font-size: 28px; /* Larger, bold heading */
+    font-weight: bold;
+    color: #333; /* Dark color for readability */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+/* Form Styling */
+.profile-update-container form {
+    display: flex;
+    flex-direction: column; /* Stack fields vertically */
+    gap: 20px; /* Space between form fields */
+}
+
+/* Labels Styling */
+.profile-update-container label {
+    font-size: 18px; /* Larger font size for labels */
+    font-weight: bold; /* Make labels more prominent */
+    color: #333; /* Darker text color for readability */
+    text-align: left; /* Align labels to the left */
+    margin-bottom: 5px; /* Add space below labels */
+}
+
+/* Input and Textarea Styling */
+.profile-update-container input[type="text"],
+.profile-update-container input[type="email"],
+.profile-update-container input[type="file"],
+.profile-update-container textarea,
+.profile-update-container select {
+    width: 100%; /* Full width */
+    padding: 8px -8px 8px 8px; /* Add 20px padding to the right */
+    font-size: 16px; /* Comfortable font size */
+    border: 1px solid #ddd; /* Subtle border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #fff; /* White background */
+    resize: vertical; /* Allow resizing of text areas vertically only */
+    transition: border-color 0.3s;
+}
+
+.profile-update-container input[type="text"],
+.profile-update-container textarea {
+    height: auto; /* Adjust height to content */
+    min-height: 40px; /* Ensure consistent height */
+}
+
+.profile-update-container textarea {
+    min-height: 80px; /* Larger text area for multi-line input */
+}
+
+.profile-update-container input:focus,
+.profile-update-container textarea:focus,
+.profile-update-container select:focus {
+    border-color: #004080; /* Highlight border on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Submit Button Styling */
+.profile-update-container button[type="submit"] {
+    width: 100%; /* Full-width button */
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    background-color: #004080; /* Primary button color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.profile-update-container button[type="submit"]:hover {
+    background-color: #0056b3; /* Slightly darker blue on hover */
+    transform: scale(1.05); /* Slight zoom */
+}
+
+/* Back Link Styling */
+.profile-update-container a {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #004080; /* Link color */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.profile-update-container a:hover {
+    color: #0056b3; /* Darker color on hover */
+}
+
+/* Current Profile Image Container */
+.current-profile-image-container {
+    text-align: center; /* Center the image */
+    margin-bottom: 20px; /* Add space below the image */
+}
+
+.current-profile-image {
+    width: 150px; /* Set a consistent size */
+    height: 150px;
+    border-radius: 50%; /* Make the image circular */
+    object-fit: cover; /* Ensure proper cropping */
+    border: 3px solid #ddd; /* Subtle border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for emphasis */
+}

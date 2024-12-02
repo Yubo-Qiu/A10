@@ -3,11 +3,9 @@ from .models import (
     Profile,
     Journal,
     Project,
-    Impact,
     Tag,
     Collaborator,
     Permission,
-    MediaGallery,
 )
 
 
@@ -39,13 +37,6 @@ class TagAdmin(admin.ModelAdmin):
     search_fields = ("name",)
 
 
-@admin.register(Impact)
-class ImpactAdmin(admin.ModelAdmin):
-    list_display = ("title", "impact_type", "related_project", "date")
-    search_fields = ("title", "description")
-    list_filter = ("impact_type",)
-
-
 @admin.register(Collaborator)
 class CollaboratorAdmin(admin.ModelAdmin):
     list_display = ("name", "collaboration_type", "contact_email")
@@ -57,16 +48,3 @@ class CollaboratorAdmin(admin.ModelAdmin):
 class PermissionAdmin(admin.ModelAdmin):
     list_display = ("role", "can_edit_blogs", "can_edit_projects", "can_manage_users")
     list_filter = ("role",)
-
-
-@admin.register(MediaGallery)
-class MediaGalleryAdmin(admin.ModelAdmin):
-    list_display = (
-        "title",
-        "media_type",
-        "upload_date",
-        "related_blog",
-        "related_project",
-    )
-    search_fields = ("title", "media_type")
-    list_filter = ("media_type",)

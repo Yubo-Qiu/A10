@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{% if journal %}Edit{% else %}Create{% endif %} Journal</h1>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-</form>
-<a href="{% url 'journal-list' %}">Back to Journals</a>
+<div class="journal-form-container">
+    <h1 class="journal-form-title">{% if journal %}Edit{% else %}Create{% endif %} Journal</h1>
+    <form method="post" enctype="multipart/form-data" class="journal-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+    <div class="back-button">
+        <a href="{% url 'journal-list' %}" class="btn btn-secondary">Back to Journals</a>
+    </div>
+</div>
 {% endblock %}

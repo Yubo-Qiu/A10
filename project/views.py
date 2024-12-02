@@ -6,13 +6,18 @@ from django.views.generic import (
     DeleteView,
     TemplateView,
 )
-from .models import Journal, Profile, Project, Collaborator
+from .models import Journal, Profile, Project, Collaborator, Tag
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Case, When
 from django.http import HttpResponseForbidden
 from project.utils import has_custom_permission
+from django import forms
+from django.utils.timezone import now
+from datetime import timedelta
+from django.http import JsonResponse
+from django.db.models import Count
 
 
 # List View for Journals
@@ -20,6 +25,34 @@ class JournalListView(ListView):
     model = Journal
     template_name = "project/journal_list.html"
     context_object_name = "journals"
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        author = self.request.GET.get("author")
+        year = self.request.GET.get("year")
+        tag = self.request.GET.get("tag")
+
+        # Filter by author, year, or tag if provided
+        if author:
+            queryset = queryset.filter(author__user__username__icontains=author)
+        if year:
+            queryset = queryset.filter(created_at__year=year)
+        if tag:
+            queryset = queryset.filter(tags__name__icontains=tag)
+
+        return queryset.distinct()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["authors"] = Journal.objects.values_list(
+            "author__user__username", flat=True
+        ).distinct()
+        context["years"] = Journal.objects.dates("created_at", "year", order="DESC")
+        context["tags"] = Tag.objects.all()
+        context["can_edit_blogs"] = has_custom_permission(
+            self.request.user, "can_edit_blogs"
+        )
+        return context
 
 
 # Detail View for Journals
@@ -49,6 +82,11 @@ class JournalCreateView(CreateView):
                 "You do not have permission to create journals."
             )
         return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        # Set the author as the logged-in user's profile
+        form.instance.author = self.request.user.project_profiles.first()
+        return super().form_valid(form)
 
 
 # Update View for Journals
@@ -139,17 +177,66 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
             self.request.user.project_profiles.first()
         )  # Get the logged-in user's profile
 
+    def get_form(self, *args, **kwargs):
+        form = super().get_form(*args, **kwargs)
+        # Remove the "clear" checkbox for profile_image
+        if "profile_image" in form.fields:
+            form.fields["profile_image"].widget.clear_checkbox = False
+        return form
+
 
 class ProjectListView(ListView):
     model = Project
     template_name = "project/project_list.html"
     context_object_name = "projects"
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        year = self.request.GET.get("year")
+        tag = self.request.GET.get("tag")
+        collaborator = self.request.GET.get("collaborator")
+        project_type = self.request.GET.get("project_type")
+
+        # Filter by year, tag, collaborator, or project type if provided
+        if year:
+            queryset = queryset.filter(start_date__year=year)
+        if tag:
+            queryset = queryset.filter(tags__name__icontains=tag)
+        if collaborator:
+            queryset = queryset.filter(
+                collaborators__user__username__icontains=collaborator
+            )
+        if project_type:
+            queryset = queryset.filter(project_type__icontains=project_type)
+
+        return queryset.distinct()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["years"] = Project.objects.dates("start_date", "year", order="DESC")
+        context["tags"] = Tag.objects.all()
+        context["collaborators"] = Profile.objects.values_list(
+            "user__username", flat=True
+        ).distinct()
+        context["project_types"] = Project.PROJECT_TYPE_CHOICES
+        context["can_edit_projects"] = has_custom_permission(
+            self.request.user, "can_edit_projects"
+        )
+        return context
+
 
 class ProjectDetailView(DetailView):
     model = Project
     template_name = "project/project_detail.html"
     context_object_name = "project"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add permission check to the context
+        context["can_edit_projects"] = has_custom_permission(
+            self.request.user, "can_edit_projects"
+        )
+        return context
 
 
 class ProjectCreateView(CreateView):
@@ -236,3 +323,36 @@ class RegisterView(CreateView):
     form_class = UserCreationForm
     template_name = "registration/register.html"
     success_url = reverse_lazy("login")
+
+
+def journals_per_day(request):
+    end_date = now()
+    start_date = end_date - timedelta(days=30)  # Adjust the range as needed
+
+    # Retrieve filter parameters
+    author = request.GET.get("author")
+    year = request.GET.get("year")
+    tag = request.GET.get("tag")
+
+    # Filter journals
+    journals = Journal.objects.filter(created_at__range=[start_date, end_date])
+    if author:
+        journals = journals.filter(author__user__username__icontains=author)
+    if year:
+        journals = journals.filter(created_at__year=year)
+    if tag:
+        journals = journals.filter(tags__name__icontains=tag)
+
+    # Aggregate by day
+    journals = (
+        journals.values("created_at__date")
+        .annotate(count=Count("id"))
+        .order_by("created_at__date")
+    )
+
+    # Prepare data for response
+    data = {
+        "labels": [str(entry["created_at__date"]) for entry in journals],
+        "counts": [entry["count"] for entry in journals],
+    }
+    return JsonResponse(data)

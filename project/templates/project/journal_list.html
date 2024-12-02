@@ -1,12 +1,119 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Published Journals</h1>
-<ul>
-    {% for journal in journals %}
-        <li>
-            <a href="{{ journal.get_absolute_url }}">{{ journal.title }}</a> - {{ journal.author }}
-        </li>
-    {% endfor %}
-</ul>
+<div class="journal-list-container">
+    <h1>Published Journals</h1>
+        <!-- Filter Form -->
+        <form method="get" class="filter-form">
+            <div class="filter-item">
+                <label for="author">Author:</label>
+                <select name="author" id="author">
+                    <option value="">All Authors</option>
+                    {% for author in authors %}
+                        <option value="{{ author }}" {% if request.GET.author == author %}selected{% endif %}>
+                            {{ author }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="filter-item">
+                <label for="year">Year:</label>
+                <select name="year" id="year">
+                    <option value="">All Years</option>
+                    {% for year in years %}
+                        <option value="{{ year.year }}" {% if request.GET.year == year.year|stringformat:"s" %}selected{% endif %}>
+                            {{ year.year }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="filter-item">
+                <label for="tag">Tag:</label>
+                <select name="tag" id="tag">
+                    <option value="">All Tags</option>
+                    {% for tag in tags %}
+                        <option value="{{ tag.name }}" {% if request.GET.tag == tag.name %}selected{% endif %}>
+                            {{ tag.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+    <ul class="journal-list">
+        {% for journal in journals %}
+            <li>
+                <div class="journal-item">
+                    <a href="{{ journal.get_absolute_url }}" class="journal-list-title">{{ journal.title }}</a>
+                    <span class="journal-created">-- {{ journal.created_at|date:"F j, Y, g:i a" }}</span>
+                </div>
+                <span class="journal-author">by {{ journal.author }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+    {% if can_edit_blogs %}
+    <div class="create-button">
+        <a href="{% url 'journal-create' %}" class="btn btn-primary">Create New Journal</a>
+    </div>
+    <!-- Plotly Chart -->
+    <div id="journalsChart" style="width: 100%; height: 400px; margin-top: 20px;"></div>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        // Function to build query string from form data
+        function getQueryString() {
+            const form = document.querySelector('.filter-form');
+            const formData = new FormData(form);
+            const params = new URLSearchParams();
+            for (const [key, value] of formData.entries()) {
+                if (value) { // Only include non-empty values
+                    params.append(key, value);
+                }
+            }
+            return params.toString();
+        }
+    
+        // Function to fetch and render the chart
+        function fetchAndRenderChart() {
+            const queryString = getQueryString();
+            const url = `{% url 'journals_per_day' %}?` + queryString;
+    
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const trace = {
+                        x: data.labels,
+                        y: data.counts,
+                        mode: 'lines+markers',
+                        line: { color: 'rgba(75, 192, 192, 1)', width: 2 },
+                        marker: { size: 6 },
+                    };
+    
+                    const layout = {
+                        title: 'Journals Created Per Day',
+                        xaxis: {
+                            title: 'Date',
+                            type: 'category', // Ensures x-axis shows discrete dates
+                            tickformat: '%Y-%m-%d', // Show only dates
+                        },
+                        yaxis: {
+                            title: 'Number of Journals',
+                            dtick: 1, // Force integer steps on y-axis
+                            rangemode: 'tozero', // Start from 0
+                        },
+                        margin: { l: 50, r: 50, t: 50, b: 50 },
+                        hovermode: 'closest',
+                    };
+    
+                    Plotly.newPlot('journalsChart', [trace], layout);
+                });
+        }
+    
+        // Initialize chart on page load
+        fetchAndRenderChart();
+    
+        // Update chart when filters change
+        document.querySelector('.filter-form').addEventListener('change', fetchAndRenderChart);
+    </script>       
+    {% endif %}
+</div>
 {% endblock %}

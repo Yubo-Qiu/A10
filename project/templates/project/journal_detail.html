@@ -7,6 +7,9 @@
         <p><strong>Author:</strong> {{ journal.author }}</p>
         <p><strong>Status:</strong> {{ journal.status }}</p>
     </div>
+    <div class="journal-meta">
+        <p><strong>Created on:</strong> {{ journal.created_at|date:"F j, Y, g:i a" }}</p>
+    </div>
     <div class="journal-content">
         <p>{{ journal.content }}</p>
     </div>
@@ -17,5 +20,8 @@
         <a href="{% url 'journal-delete' journal.pk %}" class="btn btn-danger">Delete</a>
     </div>
     {% endif %}
+    <div class="back-button">
+        <a href="{% url 'journal-list' %}" class="btn btn-secondary">Back to Journals</a>
+    </div>
 </div>
 {% endblock %}

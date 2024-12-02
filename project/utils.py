@@ -1,9 +1,6 @@
 from project.models import Permission
 
 
-from project.models import Permission
-
-
 def has_custom_permission(user, permission_name):
     """
     Check if the user has the specified permission based on their role.

@@ -14,8 +14,8 @@
         <p><strong>Role:</strong> {{ profile.role }}</p>
         <p><strong>Bio:</strong> {{ profile.bio }}</p>
         <p><strong>Contact:</strong> <a href="mailto:{{ profile.contact_email }}">{{ profile.contact_email }}</a></p>
-        <p><strong>Skills:</strong> {{ profile.skills|join:", " }}</p>
-        <p><strong>Social Links:</strong></p>
+        <p><strong>Skills:</strong> {{ profile.skills}}</p>
+        <p><strong>Social Links:</strong>{{ profile.social_links}}</p>
         <ul>
             {% for platform, link in profile.social_links.items %}
                 <li><a href="{{ link }}" target="_blank">{{ platform }}</a></li>
@@ -30,7 +30,7 @@
     </div>
     <!-- Role Change Form -->
     {% if can_manage_users %}
-        <h3>Change Role For: {{profile.user.username}}</h3>
+        <h3>Change Role For {{profile.user.username}}</h3>
         <form method="post">
             {% csrf_token %}
             <label for="role">Select New Role:</label>
@@ -41,7 +41,7 @@
                     </option>
                 {% endfor %}
             </select>
-            <button type="submit" class="role-change-button">Change Role</button>
+            <button type="submit" class="profile-back-button">Change Role</button>
         </form>
     {% endif %}
 </div>

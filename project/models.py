@@ -21,9 +21,9 @@ class Profile(models.Model):
         null=True,
         default="profile_images/default-profile.jpg",
     )
-    social_links = models.JSONField(blank=True, default=dict)
+    social_links = models.TextField(blank=True)
     contact_email = models.EmailField()
-    skills = models.JSONField(blank=True, default=list)
+    skills = models.TextField(blank=True)
 
     def __str__(self):
         return f"{self.user.username} ({self.role})"
@@ -76,13 +76,13 @@ class Project(models.Model):
     description = models.TextField()
     collaborators = models.ManyToManyField(Profile, related_name="projects")
     project_type = models.CharField(max_length=50, choices=PROJECT_TYPE_CHOICES)
-    start_date = models.DateField()
+    start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
-    project_link = models.URLField(blank=True)
+    project_link = models.URLField(blank=True, null=True)
     banner_image = models.ImageField(
         upload_to="project_banners/", blank=True, null=True
     )
-    tags = models.ManyToManyField(Tag, blank=True)  # Tags for projects
+    tags = models.ManyToManyField(Tag, blank=True, null=True)  # Tags for projects
     related_blogs = models.ManyToManyField(
         Journal, blank=True, related_name="projects"
     )  # Link to multiple journals
@@ -91,35 +91,7 @@ class Project(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        # Redirect to the first linked journal or fallback to the project detail
-        first_blog = self.related_blogs.first()
-        if first_blog:
-            return first_blog.get_absolute_url()  # Use Journal's `get_absolute_url`
         return reverse("project-detail", args=[self.pk])
-
-
-class Impact(models.Model):
-    IMPACT_TYPE_CHOICES = [
-        ("Event", "Event"),
-        ("Achievement", "Achievement"),
-        ("Partnership", "Partnership"),
-        ("Community Outreach", "Community Outreach"),
-    ]
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    related_project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    related_blog = models.ForeignKey(
-        Journal, on_delete=models.CASCADE, blank=True, null=True
-    )
-    date = models.DateField()
-    impact_type = models.CharField(max_length=50, choices=IMPACT_TYPE_CHOICES)
-    metrics = models.JSONField(
-        blank=True, default=dict
-    )  # Stores statistics or key performance metrics
-    tags = models.ManyToManyField(Tag, blank=True)  # Tags for impacts
-
-    def __str__(self):
-        return self.title
 
 
 class Collaborator(models.Model):
@@ -153,24 +125,3 @@ class Permission(models.Model):
 
     def __str__(self):
         return self.role
-
-
-class MediaGallery(models.Model):
-    MEDIA_TYPE_CHOICES = [
-        ("Image", "Image"),
-        ("Video", "Video"),
-        ("Document", "Document"),
-    ]
-    title = models.CharField(max_length=200)
-    media_type = models.CharField(max_length=20, choices=MEDIA_TYPE_CHOICES)
-    file = models.FileField(upload_to="media/")
-    related_blog = models.ForeignKey(
-        Journal, on_delete=models.CASCADE, blank=True, null=True
-    )
-    related_project = models.ForeignKey(
-        Project, on_delete=models.CASCADE, blank=True, null=True
-    )
-    upload_date = models.DateField(auto_now_add=True)
-
-    def __str__(self):
-        return self.title

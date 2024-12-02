@@ -67,12 +67,13 @@
         {% endfor %}
     </ul>
 
+    <!-- Option to create a new project if the user has permission -->
     {% if can_edit_projects %}
     <div class="create-button">
         <a href="{% url 'project-create' %}" class="btn btn-primary">Create New Project</a>
     </div>
     {% endif %}
-    
+    <!-- Message displayed when no projects are available -->
     {% if not projects %}
         <p>No projects available.</p>
     {% endif %}

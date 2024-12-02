@@ -3,6 +3,7 @@
 {% block content %}
 <div class="project-detail-container">
     <h1 class="project-title">{{ project.title }}</h1>
+    <!-- Display project metadata -->
     <div class="project-meta">
         <p><strong>Type:</strong> {{ project.project_type }}</p>
         <p><strong>Collaborators:</strong></p>
@@ -11,6 +12,7 @@
                 <li>{{ collaborator.user.username }}</li>
             {% endfor %}
         </ul>
+        <!-- List of related journals -->
         <p><strong>Related Journals:</strong></p>
         <ul class="related-journals">
             {% for journal in project.related_blogs.all %}
@@ -18,15 +20,18 @@
             {% endfor %}
         </ul>
     </div>
+    <!-- Project description -->
     <div class="project-description">
         <p>{{ project.description }}</p>
     </div>
     {% if can_edit_projects %}
+    <!-- Actions for users with editing permissions -->
     <div class="journal-actions">
         <a href="{% url 'project-update' project.pk %}" class="btn btn-warning">Update</a>
         <a href="{% url 'project-delete' project.pk %}" class="btn btn-danger">Delete</a>
     </div>
     {% endif %}
+    <!-- Button to navigate back to the project list -->
     <div class="back-button">
         <a href="{% url 'project-list' %}" class="btn btn-secondary">Back to Project List</a>
     </div>

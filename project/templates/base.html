@@ -5,16 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}TFB{% endblock %}</title>
     {% load static %}
+    <!-- Link to custom styles and Swiper CSS for sliders -->
     <link rel="stylesheet" href="{% static 'project/styles.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
 </head>
 <body>
+    <!-- Navbar Section -->
     <header class="navbar">
         <div class="navbar-container">
             <div class="logo-container">
                 <img src="{% static 'project/logo.png' %}" alt="Organization Logo" class="logo">
                 <span class="org-name">The Fisherman's Bastion</span>
             </div>
+            <!-- Navigation links -->
             <nav class="nav-links">
                 <ul>
                     <li><a href="{% url 'home' %}">Home</a></li>
@@ -22,6 +25,7 @@
                     <li><a href="{% url 'profile-list' %}">Profiles</a></li>
                     <li><a href="{% url 'project-list' %}">Projects</a></li>
                     {% if request.user.is_authenticated %}
+                    <!-- Display user info and logout option if logged in -->
                     <li style="overflow: hidden; white-space: nowrap;">
                         <a href="{% url 'profile-detail' request.user.project_profiles.first.pk %}">
                             <img src="{{ request.user.project_profiles.first.profile_image.url }}"
@@ -36,21 +40,23 @@
                         </form>
                     </li>                    
                     {% else %}
+                    <!-- Login link if user is not authenticated -->
                     <li><a href="{% url 'login' %}">Login</a></li>
                     {% endif %}
                 </ul>
             </nav>
         </div>
     </header>
-
+    <!-- Main content area where other templates are injected -->
     <main>
         {% block content %}
         {% endblock %}
     </main>
-
+    <!-- Footer Section -->
     <footer class="footer">
         <p>&copy; 2024 The Fisherman's Bastion. All rights reserved.</p>
     </footer>
+    <!-- Include Swiper JS for sliders -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 </body>
 </html>

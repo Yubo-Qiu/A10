@@ -10,6 +10,7 @@
         <img src="{{ profile.profile_image.url | default:'/static/project/default-profile.jpg' }}" 
              alt="{{ profile.user.username }}" class="profile-image">
     </div>
+    <!-- Displaying the profile's information -->
     <div class="profile-info">
         <p><strong>Role:</strong> {{ profile.role }}</p>
         <p><strong>Bio:</strong> {{ profile.bio }}</p>
@@ -22,6 +23,7 @@
             {% endfor %}
         </ul>
     </div>
+    <!-- Actions available to the profile owner -->
     <div class="profile-actions">
         {% if request.user == profile.user %}
             <a href="{% url 'profile-edit' %}" class="profile-edit-button">Edit Profile</a>

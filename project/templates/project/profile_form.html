@@ -9,6 +9,7 @@
         <img src="{{ request.user.project_profiles.first.profile_image.url }}" alt="Current Profile Image" class="current-profile-image">
     </div>
     {% endif %}
+    <!-- Profile update form -->
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}

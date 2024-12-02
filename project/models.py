@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 
+# Profile model representing user profiles
 class Profile(models.Model):
     ROLE_CHOICES = [
         ("Admin", "Admin"),
@@ -32,6 +33,7 @@ class Profile(models.Model):
         return reverse("profile-detail", args=[self.pk])
 
 
+# Tag model for categorization
 class Tag(models.Model):
     name = models.CharField(
         max_length=50, unique=True
@@ -41,6 +43,7 @@ class Tag(models.Model):
         return self.name
 
 
+# Journal model for articles and blogs
 class Journal(models.Model):
     STATUS_CHOICES = [
         ("Draft", "Draft"),
@@ -65,6 +68,7 @@ class Journal(models.Model):
         return reverse("journal-detail", args=[self.pk])
 
 
+# Project model for managing organizational projects
 class Project(models.Model):
     PROJECT_TYPE_CHOICES = [
         ("Software", "Software"),
@@ -94,6 +98,7 @@ class Project(models.Model):
         return reverse("project-detail", args=[self.pk])
 
 
+# Collaborator model for external partnerships
 class Collaborator(models.Model):
     name = models.CharField(max_length=200)
     logo = models.ImageField(upload_to="collaborator_logos/", blank=True, null=True)
@@ -112,6 +117,7 @@ class Collaborator(models.Model):
         return self.name
 
 
+# Permission model for managing user access levels
 class Permission(models.Model):
     ROLE_CHOICES = [
         ("Admin", "Admin"),

@@ -3,6 +3,7 @@
 {% block content %}
 <div class="journal-detail-container">
     <h1 class="journal-title">{{ journal.title }}</h1>
+    <!-- Meta information about the journal -->
     <div class="journal-meta">
         <p><strong>Author:</strong> {{ journal.author }}</p>
         <p><strong>Status:</strong> {{ journal.status }}</p>
@@ -10,11 +11,14 @@
     <div class="journal-meta">
         <p><strong>Created on:</strong> {{ journal.created_at|date:"F j, Y, g:i a" }}</p>
     </div>
+    
+    <!-- Main content of the journal -->
     <div class="journal-content">
         <p>{{ journal.content }}</p>
     </div>
 
     {% if can_edit_blogs %}
+    <!-- Actions for users with editing permissions -->
     <div class="journal-actions">
         <a href="{% url 'journal-update' journal.pk %}" class="btn btn-warning">Update</a>
         <a href="{% url 'journal-delete' journal.pk %}" class="btn btn-danger">Delete</a>

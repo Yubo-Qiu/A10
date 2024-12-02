@@ -2,7 +2,9 @@
 
 {% block content %}
 <div class="project-form-container">
+    <!-- Dynamic title for creating or editing a project -->
     <h1 class="project-form-title">{% if project %}Edit{% else %}Create{% endif %} Project</h1>
+    <!-- Project form -->
     <form method="post" enctype="multipart/form-data" class="project-form">
         {% csrf_token %}
         {{ form.as_p }}

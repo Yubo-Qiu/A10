@@ -21,6 +21,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path("", HomePageView.as_view(), name="home"),
+    # Journal-related paths
     path("journals/", JournalListView.as_view(), name="journal-list"),
     path("journals/<int:pk>/", JournalDetailView.as_view(), name="journal-detail"),
     path("journals/new/", JournalCreateView.as_view(), name="journal-create"),
@@ -30,8 +31,10 @@ urlpatterns = [
     path(
         "journals/<int:pk>/delete/", JournalDeleteView.as_view(), name="journal-delete"
     ),
+    # Profile-related paths
     path("profiles/", ProfileListView.as_view(), name="profile-list"),
     path("profiles/<int:pk>/", ProfileDetailView.as_view(), name="profile-detail"),
+    # Project-related paths
     path("projects/", ProjectListView.as_view(), name="project-list"),
     path("projects/<int:pk>/", ProjectDetailView.as_view(), name="project-detail"),
     path("projects/new/", ProjectCreateView.as_view(), name="project-create"),
@@ -42,6 +45,7 @@ urlpatterns = [
         "projects/<int:pk>/delete/", ProjectDeleteView.as_view(), name="project-delete"
     ),
     path("profile/edit/", ProfileUpdateView.as_view(), name="profile-edit"),
+    # Authentication paths
     path(
         "login/",
         auth_views.LoginView.as_view(template_name="registration/login.html"),

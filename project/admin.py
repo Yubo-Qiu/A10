@@ -17,6 +17,7 @@ class ProfileAdmin(admin.ModelAdmin):
     list_filter = ("role",)
 
 
+# Admin customization for the Journal model
 @admin.register(Journal)
 class JournalAdmin(admin.ModelAdmin):
     list_display = ("title", "author", "status", "created_at")
@@ -24,6 +25,7 @@ class JournalAdmin(admin.ModelAdmin):
     list_filter = ("status", "tags")
 
 
+# Admin customization for the Project model
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ("title", "project_type", "start_date", "end_date")
@@ -31,12 +33,14 @@ class ProjectAdmin(admin.ModelAdmin):
     list_filter = ("project_type",)
 
 
+# Admin customization for the Tag model
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = ("name",)
     search_fields = ("name",)
 
 
+# Admin customization for the Collaborator model
 @admin.register(Collaborator)
 class CollaboratorAdmin(admin.ModelAdmin):
     list_display = ("name", "collaboration_type", "contact_email")
@@ -44,6 +48,7 @@ class CollaboratorAdmin(admin.ModelAdmin):
     list_filter = ("collaboration_type",)
 
 
+# Admin customization for the Permission model
 @admin.register(Permission)
 class PermissionAdmin(admin.ModelAdmin):
     list_display = ("role", "can_edit_blogs", "can_edit_projects", "can_manage_users")

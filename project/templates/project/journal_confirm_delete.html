@@ -3,6 +3,7 @@
 {% block content %}
 <div class="delete-journal-container">
     <h1 class="delete-journal-title">Delete Journal</h1>
+    <!-- Confirmation message with the journal title -->
     <p class="delete-journal-message">Are you sure you want to delete "<strong>{{ journal.title }}</strong>"?</p>
     <form method="post" class="delete-journal-form">
         {% csrf_token %}

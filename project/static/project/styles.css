@@ -18,7 +18,7 @@ html, body {
     top: 0;
     left: 0;
     width: 100%; /* Covers the entire width */
-    height: 71.5%; /* Covers the entire height */
+    height: 580px; /* Covers the entire height */
     background-color: #161616; /* Black background */
     z-index: -1; /* Lower z-index to sit behind everything */
 }
@@ -217,7 +217,7 @@ html, body {
 
 /* Swiper Pagination (Dots) */
 .swiper-pagination {
-    padding-bottom: 15rem;
+    padding-bottom: 270px;
     left: 50%;
     transform: translateX(-50%); /* Center it horizontally */
     text-align: center;

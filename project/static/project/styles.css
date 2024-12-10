@@ -217,7 +217,8 @@ html, body {
 
 /* Swiper Pagination (Dots) */
 .swiper-pagination {
-    padding-bottom: 270px;
+    position: fixed; /* fix */
+    top: 568px; /*  */
     left: 50%;
     transform: translateX(-50%); /* Center it horizontally */
     text-align: center;

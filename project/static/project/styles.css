@@ -20,7 +20,7 @@ html, body {
     width: 100%; /* Covers the entire width */
     height: 580px; /* Covers the entire height */
     background-color: #161616; /* Black background */
-    z-index: -1; /* Lower z-index to sit behind everything */
+    z-index: 0; /* Lower z-index to sit behind everything */
 }
 
 
@@ -233,12 +233,14 @@ html, body {
     margin: 0 5px;
     border-radius: 50%;
     transition: transform 0.3s, opacity 0.3s;
+    z-index: 10;
 }
 
 .swiper-pagination-bullet-active {
     opacity: 1;
     transform: scale(1.3); /* Highlight the active dot */
     background-color: #ffffff !important; /* Yellow for the active dot */
+    z-index: 10;
 }
 
 /* Swiper Progress Bar */
@@ -275,10 +277,12 @@ html, body {
     text-align: center;
     margin: 30px auto;
     padding: 20px;
-    padding-top: 4rem;
+    top: 20px;
+    padding-top: 60px;
     color: #333;
     border-radius: 8px;
     max-width: 800px; /* Limit the width for better readability */
+    z-index: -2;
 }
 
 .home-introduction h1 {
